@@ -33,6 +33,7 @@ const stoicQuote = async (question: string) => {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { question, mode } = req.body
+    console.log({ question, mode })
     try {
       if (mode === "quote") {
         const answer = await stoicQuote(question)

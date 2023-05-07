@@ -5,7 +5,7 @@ import Link from "next/link"
 import theme from "../lib/theme"
 import { useRouter } from "next/router"
 
-function MyApp({ Component, pageProps }: AppProps) {
+function StoicApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   return (
@@ -26,4 +26,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+export default StoicApp
