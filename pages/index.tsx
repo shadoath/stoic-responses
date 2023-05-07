@@ -1,10 +1,16 @@
-import { Box, Button, CircularProgress, Container, TextField, Typography } from "@mui/material"
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material"
 import axios from "axios"
 import { useState } from "react"
 import theme from "../lib/theme"
-import ToggleButton from "@mui/lab/ToggleButton"
-import ToggleButtonGroup from "@mui/lab/ToggleButtonGroup"
-
 const Home = () => {
   const [question, setQuestion] = useState("")
   const [loading, setLoading] = useState(false)
@@ -27,13 +33,13 @@ const Home = () => {
     setLoading(true)
     try {
       const response = await axios.post(`/api/stoic/ai`, { question, mode })
-      setQaPairs((prevQaPairs) => [...prevQaPairs, { question, answer: response.data.answer }])
+      setQaPairs((prevQaPairs) => [{ question, answer: response.data.answer }, ...prevQaPairs])
       setQuestion("")
     } catch (error) {
       console.error("Error fetching stoic response:", error)
       setQaPairs((prevQaPairs) => [
-        ...prevQaPairs,
         { question, answer: "Error fetching stoic response" },
+        ...prevQaPairs,
       ])
     } finally {
       setLoading(false)

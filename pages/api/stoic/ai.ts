@@ -2,13 +2,13 @@ import { NextApiRequest, NextApiResponse } from "next"
 import { openai } from "../../../lib/openAi"
 
 const stoicResponse = async (question: string) => {
-  const prompt = `Please provide a relevant quote from one of the great Stoic philosophers (such as Epictetus, Seneca, or Marcus Aurelius) in response to the following question: "${question}"`
+  const prompt = `I am an AI trained in Stoic philosophy. How would a Stoic philosopher respond to the following question: "${question}"?`
 
   const response = await openai.createCompletion({
     prompt,
-    model: "text-davinci-003",
+    model: "text-davinci-002",
     temperature: 0.7,
-    max_tokens: 180,
+    max_tokens: 210,
     n: 1,
   })
 
@@ -20,12 +20,11 @@ const stoicQuote = async (question: string) => {
 
   const response = await openai.createCompletion({
     prompt,
-    model: "text-davinci-003",
-    temperature: 0.8,
-    max_tokens: 180,
+    model: "text-davinci-002",
+    temperature: 0.7,
+    max_tokens: 210,
     n: 1,
   })
-  console.log(response.data)
 
   return response.data.choices[0].text
 }
@@ -44,6 +43,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
     } catch (error) {
       console.error("Error generating stoic response:", error)
+      console.dir(error, { depth: null })
       res.status(500).json({ error: "Error generating stoic response" })
     }
   } else {
