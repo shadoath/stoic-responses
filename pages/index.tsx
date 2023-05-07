@@ -1,21 +1,37 @@
 import { useState } from "react"
 import axios from "axios"
-import { Box, Button, Container, CssBaseline, TextField, Typography } from "@mui/material"
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  CssBaseline,
+  TextField,
+  Typography,
+} from "@mui/material"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 
 const theme = createTheme()
 
 const Home = () => {
   const [question, setQuestion] = useState("")
-  const [answer, setAnswer] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [qaPairs, setQaPairs] = useState<Array<{ question: string; answer: string }>>([])
 
   const askQuestion = async () => {
+    setLoading(true)
     try {
       const response = await axios.post("/api/stoicAnswer", { question })
-      setAnswer(response.data.answer)
+      setQaPairs((prevQaPairs) => [...prevQaPairs, { question, answer: response.data.answer }])
+      setQuestion("")
     } catch (error) {
       console.error("Error fetching stoic response:", error)
-      setAnswer("Error fetching stoic response")
+      setQaPairs((prevQaPairs) => [
+        ...prevQaPairs,
+        { question, answer: "Error fetching stoic response" },
+      ])
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -36,19 +52,39 @@ const Home = () => {
           <Typography variant="h4" align="center" gutterBottom>
             Stoic Answers
           </Typography>
-          <TextField
-            fullWidth
-            variant="outlined"
-            label="Ask your question here"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-          />
-          <Box sx={{ mt: 2, mb: 2 }}>
-            <Button fullWidth variant="contained" color="primary" onClick={askQuestion}>
-              Ask
-            </Button>
-          </Box>
-          <Typography variant="body1">{answer}</Typography>
+          <form>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Ask your question here"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              disabled={loading}
+            />
+            <Box sx={{ mt: 2, mb: 2 }}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={askQuestion}
+                disabled={loading}
+                type="submit"
+              >
+                Ask
+              </Button>
+            </Box>
+          </form>
+          {loading && (
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <CircularProgress />
+            </Box>
+          )}
+          {qaPairs.map((qaPair, index) => (
+            <Box key={index} sx={{ mb: 2 }}>
+              <Typography variant="subtitle1">Q: {qaPair.question}</Typography>
+              <Typography variant="body1">A: {qaPair.answer}</Typography>
+            </Box>
+          ))}
         </Container>
       </Box>
     </ThemeProvider>
