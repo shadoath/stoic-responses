@@ -4,6 +4,7 @@ import { AppBar, Button, CssBaseline, Toolbar } from "@mui/material"
 import Link from "next/link"
 import theme from "../lib/theme"
 import { useRouter } from "next/router"
+import { Analytics } from "@vercel/analytics/react"
 
 function StoicApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -22,6 +23,7 @@ function StoicApp({ Component, pageProps }: AppProps) {
         </Toolbar>
       </AppBar>
       <Component {...pageProps} />
+      <Analytics />
     </ThemeProvider>
   )
 }
