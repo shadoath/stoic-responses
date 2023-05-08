@@ -54,6 +54,9 @@ const Home = () => {
       setMode(newMode)
     }
   }
+  const clearResponses = () => {
+    setQaPairs([])
+  }
 
   return (
     <Box
@@ -69,7 +72,7 @@ const Home = () => {
     >
       <Container maxWidth="sm">
         <Typography variant="h4" align="center" gutterBottom>
-          Stoic Responses
+          Stoic Mind AI
         </Typography>
         <form onSubmit={handleSubmit}>
           <ToggleButtonGroup
@@ -79,8 +82,8 @@ const Home = () => {
             fullWidth
             sx={{ marginBottom: 1 }}
           >
-            <ToggleButton value="response">Stoic Response</ToggleButton>
-            <ToggleButton value="quote">Stoic Quote</ToggleButton>
+            <ToggleButton value="response">Response</ToggleButton>
+            <ToggleButton value="quote">Quote</ToggleButton>
           </ToggleButtonGroup>
 
           <TextField
@@ -106,6 +109,14 @@ const Home = () => {
           <Box key={index} sx={{ mb: 2 }}>
             <Typography variant="subtitle1">Q: {qaPair.question}</Typography>
             <Typography variant="body1">A: {qaPair.answer}</Typography>
+            <Button
+              color="secondary"
+              variant="outlined"
+              onClick={clearResponses}
+              sx={{ marginTop: 2 }}
+            >
+              Clear
+            </Button>
           </Box>
         ))}
       </Container>

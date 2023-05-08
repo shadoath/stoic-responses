@@ -23,15 +23,22 @@ const About = () => {
           asking questions and displaying AI-generated responses using Next.js and Material-UI.
         </Typography>
         <Typography variant="body1" align="justify" paragraph>
-          The purpose of this app is to showcase the integration of ChatGPT, a state-of-the-art
-          language model, with a modern web application built using Next.js and TypeScript. With a
-          focus on stoic philosophy, the app aims to provide insightful and thought-provoking
-          answers to user questions.
+          The purpose of this app is to showcase the integration of the ChatGPT language model, with
+          a modern web application built using Next.js and TypeScript. With a focus on stoic
+          philosophy, the app aims to provide insightful and thought-provoking answers to user
+          questions.
         </Typography>
         <Typography variant="body1" align="justify" paragraph>
-          While the AI-generated responses can be helpful, they should not be considered as
-          professional advice or an authoritative source. Users are encouraged to reflect on the
-          answers and apply critical thinking when using the app.
+          Disclaimer: while the AI-generated responses can be helpful, they should not be considered
+          as professional advice or an authoritative source. Users are encouraged to reflect on the
+          answers and apply critical thinking when using the app. The quotes generated are often not
+          actualy quotes from the stoics, but rather a paraphrasing of their ideas.
+        </Typography>
+        <Typography variant="body1" align="justify" paragraph>
+          The source code for this app is available on{" "}
+          <a href="https://github.com/shadoath/stoic-responses" target="_blank" rel="noreferrer">
+            GitHub.com
+          </a>
         </Typography>
       </Container>
     </Box>
