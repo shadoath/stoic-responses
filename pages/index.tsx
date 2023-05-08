@@ -109,16 +109,11 @@ const Home = () => {
           <Box key={index} sx={{ mb: 2 }}>
             <Typography variant="subtitle1">Q: {qaPair.question}</Typography>
             <Typography variant="body1">A: {qaPair.answer}</Typography>
-            <Button
-              color="secondary"
-              variant="outlined"
-              onClick={clearResponses}
-              sx={{ marginTop: 2 }}
-            >
-              Clear
-            </Button>
           </Box>
         ))}
+        <Button color="secondary" variant="outlined" onClick={clearResponses} sx={{ marginTop: 2 }}>
+          Clear
+        </Button>
       </Container>
     </Box>
   )
