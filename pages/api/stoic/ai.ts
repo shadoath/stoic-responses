@@ -6,7 +6,7 @@ const stoicResponse = async (question: string) => {
 
   const response = await openai.createCompletion({
     prompt,
-    model: "text-davinci-002",
+    model: "gpt-4",
     temperature: 0.7,
     max_tokens: 210,
     n: 1,
@@ -20,7 +20,7 @@ const stoicQuote = async (question: string) => {
 
   const response = await openai.createCompletion({
     prompt,
-    model: "text-davinci-002",
+    model: "gpt-4",
     temperature: 0.7,
     max_tokens: 210,
     n: 1,
