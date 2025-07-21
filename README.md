@@ -1,47 +1,50 @@
-# TypeScript Next.js example
+# Stoic Mind AI
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+A Next.js application that provides Stoic philosophy-based responses to your questions. Ask any question and receive wisdom inspired by the great Stoic philosophers like Marcus Aurelius, Epictetus, and Seneca.
 
-## Deploy your own
+View it now at [stoicresponses.com](https://stoicresponses.com)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-typescript)
+## Features
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+- **Two response modes:**
+  - **Response**: Get advice from the perspective of Stoic philosophy
+  - **Quote**: Receive relevant quotes from Stoic philosophers with context
+- **Clean, intuitive interface** built with Material-UI
+- **Real-time responses** powered by OpenAI's GPT-4
+- **Responsive design** that works on desktop and mobile
 
-## How to use it?
+## Setup
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env.local` file and add your OpenAI API key:
+   ```
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-npx create-next-app --example with-typescript with-typescript-app
-```
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-```bash
-yarn create next-app --example with-typescript with-typescript-app
-```
+## Available Scripts
 
-```bash
-pnpm create next-app --example with-typescript with-typescript-app
-```
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run type-check` - Run TypeScript type checking
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Tech Stack
 
-## Notes
+- **Framework**: Next.js with TypeScript
+- **UI**: Material-UI with custom theme
+- **AI Integration**: OpenAI GPT-4 API
+- **Analytics**: Vercel Analytics
 
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
+## Deploy
 
-```
-npm install --save-dev typescript
-```
-
-To enable TypeScript's features, we install the type declarations for React and Node.
-
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
-
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
-
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
-
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+Deploy easily with [Vercel](https://vercel.com/new) or any other Next.js hosting platform. Make sure to add your `OPENAI_API_KEY` environment variable in your deployment settings.

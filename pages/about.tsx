@@ -10,7 +10,7 @@ const About = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "lightblue",
+        backgroundColor: "background.default",
       }}
     >
       <Container maxWidth="sm">
