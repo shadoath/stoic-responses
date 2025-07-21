@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next"
+import type { NextApiRequest, NextApiResponse } from "next"
 import { openai } from "../../../lib/openAi"
 
 const stoicResponse = async (question: string) => {
