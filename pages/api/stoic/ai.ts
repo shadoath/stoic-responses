@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { openai } from "../../../lib/openAi"
 
-const stoicResponse = async (question: string, model: string = "gpt-4o-mini") => {
+const stoicResponse = async (question: string, model = "gpt-4o-mini") => {
   const prompt =
     "As a Stoic philosopher, provide a concise response incorporating Stoic philosophy. Be succinct and to the point."
 
@@ -25,9 +25,9 @@ const stoicResponse = async (question: string, model: string = "gpt-4o-mini") =>
   return response.data.choices[0].message.content
 }
 
-const stoicQuote = async (question: string, model: string = "gpt-4o-mini") => {
+const stoicQuote = async (question: string, model = "gpt-4o-mini") => {
   const prompt =
-    "Please provide a relevant quote from one of the great Stoic philosophers (such as Epictetus, Seneca, or Marcus Aurelius) in response to the user's question.  If possible provide context for the quote and where it came from."
+    "Please provide a relevant quote from one of the great Stoic philosophers (such as Epictetus, Seneca, or Marcus Aurelius) in response to the user's question. Only add a quote, no other text."
 
   const response = await openai.createChatCompletion({
     messages: [
