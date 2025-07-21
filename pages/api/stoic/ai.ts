@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { openai } from "../../../lib/openAi"
 
-const stoicResponse = async (question: string) => {
-  const prompt = `I am an AI trained in Stoic philosophy. How would a Stoic philosopher respond to the following question: "${question}"?`
+const stoicResponse = async (question: string, model: string = "gpt-4o-mini") => {
+  const prompt =
+    "As a Stoic philosopher, provide a concise response incorporating Stoic philosophy. Be succinct and to the point."
 
   const response = await openai.createChatCompletion({
     messages: [
@@ -10,18 +11,23 @@ const stoicResponse = async (question: string) => {
         role: "system",
         content: prompt,
       },
+      {
+        role: "user",
+        content: question,
+      },
     ],
-    model: "gpt-4",
+    model: model,
     temperature: 0.7,
-    max_tokens: 210,
+    max_tokens: 500,
     n: 1,
   })
 
   return response.data.choices[0].message.content
 }
 
-const stoicQuote = async (question: string) => {
-  const prompt = `Please provide a relevant quote from one of the great Stoic philosophers (such as Epictetus, Seneca, or Marcus Aurelius) in response to the following question: "${question}". If possible provide context for the quote and where it came from.`
+const stoicQuote = async (question: string, model: string = "gpt-4o-mini") => {
+  const prompt =
+    "Please provide a relevant quote from one of the great Stoic philosophers (such as Epictetus, Seneca, or Marcus Aurelius) in response to the user's question.  If possible provide context for the quote and where it came from."
 
   const response = await openai.createChatCompletion({
     messages: [
@@ -29,10 +35,14 @@ const stoicQuote = async (question: string) => {
         role: "system",
         content: prompt,
       },
+      {
+        role: "user",
+        content: question,
+      },
     ],
-    model: "gpt-4",
+    model: model,
     temperature: 0.7,
-    max_tokens: 210,
+    max_tokens: 500,
     n: 1,
   })
 
@@ -41,13 +51,13 @@ const stoicQuote = async (question: string) => {
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const { question, mode } = req.body
+    const { question, mode, model } = req.body
     try {
       if (mode === "quote") {
-        const answer = await stoicQuote(question)
+        const answer = await stoicQuote(question, model)
         res.status(200).json({ answer })
       } else {
-        const answer = await stoicResponse(question)
+        const answer = await stoicResponse(question, model)
         res.status(200).json({ answer })
       }
     } catch (error) {

@@ -2,6 +2,8 @@
 
 A Next.js application that provides Stoic philosophy-based responses to your questions. Ask any question and receive wisdom inspired by the great Stoic philosophers like Marcus Aurelius, Epictetus, and Seneca.
 
+View it now at [stoicresponses.com](https://stoicresponses.com)
+
 ## Features
 
 - **Two response modes:**

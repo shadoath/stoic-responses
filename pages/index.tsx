@@ -7,7 +7,14 @@ import {
   ToggleButton,
   ToggleButtonGroup,
   Typography,
+  IconButton,
+  Modal,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material"
+import { Settings as SettingsIcon } from "@mui/icons-material"
 import axios from "axios"
 import { useState } from "react"
 import theme from "../lib/theme"
@@ -16,6 +23,16 @@ const Home = () => {
   const [loading, setLoading] = useState(false)
   const [qaPairs, setQaPairs] = useState<Array<{ question: string; answer: string }>>([])
   const [mode, setMode] = useState<"response" | "quote">("response")
+  const [selectedModel, setSelectedModel] = useState("gpt-4o-mini")
+  const [settingsOpen, setSettingsOpen] = useState(false)
+
+  const availableModels = [
+    { value: "gpt-4", label: "GPT-4" },
+    { value: "gpt-4-turbo", label: "GPT-4 Turbo" },
+    { value: "gpt-3.5-turbo", label: "GPT-3.5 Turbo" },
+    { value: "gpt-4o", label: "GPT-4o" },
+    { value: "gpt-4o-mini", label: "GPT-4o Mini" },
+  ]
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -32,7 +49,7 @@ const Home = () => {
   const getStoic = async (mode, question) => {
     setLoading(true)
     try {
-      const response = await axios.post(`/api/stoic/ai`, { question, mode })
+      const response = await axios.post(`/api/stoic/ai`, { question, mode, model: selectedModel })
       setQaPairs((prevQaPairs) => [{ question, answer: response.data.answer }, ...prevQaPairs])
       setQuestion("")
     } catch (error) {
@@ -67,7 +84,7 @@ const Home = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "lightblue",
+        backgroundColor: "background.default",
       }}
     >
       <Container maxWidth="sm">
@@ -106,15 +123,113 @@ const Home = () => {
           </Box>
         )}
         {qaPairs.map((qaPair, index) => (
-          <Box key={index} sx={{ mb: 2 }}>
-            <Typography variant="subtitle1">Q: {qaPair.question}</Typography>
-            <Typography variant="body1">A: {qaPair.answer}</Typography>
+          <Box
+            key={index}
+            sx={{
+              mb: 3,
+              p: 3,
+              border: "1px solid",
+              borderColor: "primary.light",
+              borderRadius: 2,
+              backgroundColor: "background.paper",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontWeight: 600,
+                color: "primary.dark",
+                mb: 1.5,
+                pb: 1,
+                borderBottom: "1px solid",
+                borderColor: "grey.300",
+              }}
+            >
+              Q: {qaPair.question}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                lineHeight: 1.6,
+                color: "text.primary",
+                fontStyle: "italic",
+              }}
+            >
+              {qaPair.answer}
+            </Typography>
           </Box>
         ))}
         <Button color="secondary" variant="outlined" onClick={clearResponses} sx={{ marginTop: 2 }}>
           Clear
         </Button>
       </Container>
+
+      {/* Settings Button - Bottom Left */}
+      <IconButton
+        onClick={() => setSettingsOpen(true)}
+        sx={{
+          position: "fixed",
+          bottom: 16,
+          left: 16,
+          backgroundColor: "primary.main",
+          color: "white",
+          "&:hover": {
+            backgroundColor: "primary.dark",
+          },
+        }}
+      >
+        <SettingsIcon />
+      </IconButton>
+
+      {/* Settings Modal */}
+      <Modal
+        open={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
+        aria-labelledby="settings-modal"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            backgroundColor: "background.paper",
+            border: "2px solid",
+            borderColor: "primary.main",
+            borderRadius: 2,
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography variant="h6" sx={{ mb: 3, color: "text.primary" }}>
+            Settings
+          </Typography>
+
+          <FormControl fullWidth sx={{ mb: 3 }}>
+            <InputLabel id="model-select-label">AI Model</InputLabel>
+            <Select
+              labelId="model-select-label"
+              value={selectedModel}
+              label="AI Model"
+              onChange={(e) => setSelectedModel(e.target.value)}
+            >
+              {availableModels.map((model) => (
+                <MenuItem key={model.value} value={model.value}>
+                  {model.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Button onClick={() => setSettingsOpen(false)} variant="contained" color="primary">
+              Close
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </Box>
   )
 }
