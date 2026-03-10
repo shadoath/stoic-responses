@@ -48,3 +48,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 ## Deploy
 
 Deploy easily with [Vercel](https://vercel.com/new) or any other Next.js hosting platform. Make sure to add your `OPENAI_API_KEY` environment variable in your deployment settings.
+
+---
+
+A [Whiteboard Works](https://whiteboardworks.com) project.
