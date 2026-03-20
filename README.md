@@ -15,8 +15,7 @@ View it now at [stoicresponses.com](https://stoicresponses.com)
 
 ## Setup
 
-1. Clone the repository
-2. Install dependencies:
+1. Install dependencies:
    ```bash
    npm install
    ```
