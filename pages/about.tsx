@@ -18,7 +18,7 @@ const About = () => {
           About Stoic Answers
         </Typography>
         <Typography variant="body1" align="justify" paragraph>
-          Stoic Answers is a simple web app that uses OpenAI's ChatGPT API to provide stoic
+          Stoic Answers is a simple web app that uses OpenAI&apos;s ChatGPT API to provide stoic
           responses to user questions. The app demonstrates how to create a user interface for
           asking questions and displaying AI-generated responses using Next.js and Material-UI.
         </Typography>

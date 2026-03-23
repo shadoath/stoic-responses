@@ -19,11 +19,11 @@ View it now at [stoicresponses.com](https://stoicresponses.com)
    ```bash
    npm install
    ```
-3. Create a `.env.local` file and add your OpenAI API key:
+2. Create a `.env.local` file and add your OpenAI API key:
    ```
    OPENAI_API_KEY=your_openai_api_key_here
    ```
-4. Run the development server:
+3. Run the development server:
    ```bash
    npm run dev
    ```

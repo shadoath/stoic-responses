@@ -49,7 +49,7 @@ const stoicQuote = async (question: string, model = "gpt-4o-mini") => {
   return response.data.choices[0].message.content
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { question, mode, model } = req.body
     try {
@@ -70,3 +70,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(405).end("Method Not Allowed")
   }
 }
+
+export default handler
